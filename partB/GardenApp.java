@@ -16,9 +16,8 @@ public class GardenApp {
     private static int[][] garden;
 
     public static void main(String[] args) {
-        garden = new int[10][10]; // Initialize the garden array
+        garden = new int[10][10];
 
-        // Create and start the threads
         Thread gardenerThread = new Thread(new Gardener(garden, lock));
         Thread natureThread = new Thread(new Nature(garden, lock));
         Thread monitor1Thread = new Thread(new Monitor1(garden, lock));

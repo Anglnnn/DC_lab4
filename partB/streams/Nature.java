@@ -15,24 +15,20 @@ public class Nature implements Runnable {
     @Override
     public void run() {
         while (true) {
-            // Acquire a write lock to change the state of the garden
             lock.writeLock().lock();
 
-            // Arbitrarily change the state of some plants
             for (int i = 0; i < garden.length; i++) {
                 for (int j = 0; j < garden[i].length; j++) {
                     if (Math.random() < 0.5) {
-                        garden[i][j] = 0; // Wilted plant
+                        garden[i][j] = 0;
                     } else {
-                        garden[i][j] = 1; // Healthy plant
+                        garden[i][j] = 1;
                     }
                 }
             }
 
-            // Release the write lock
             lock.writeLock().unlock();
 
-            // Sleep for a while
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {

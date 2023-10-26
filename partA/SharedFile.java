@@ -23,7 +23,7 @@ public class SharedFile {
         } finally {
             lock.readLock().unlock();
         }
-        return ""; // Default value if the record is not found
+        return "";
     }
 
     public static String findLastNameByPhoneNumber(String phoneNumber) throws IOException {
@@ -39,7 +39,7 @@ public class SharedFile {
         } finally {
             lock.readLock().unlock();
         }
-        return ""; // Default value if the record is not found
+        return "";
     }
 
     public static void addRecord(String name, String phoneNumber) throws IOException {
@@ -73,7 +73,6 @@ public class SharedFile {
             lock.writeLock().unlock();
         }
 
-        // Check if the record was deleted
         String phone = findPhoneByLastName(name);
         if (phone.isEmpty()) {
             System.out.println("Record for " + name + " deleted successfully.");
@@ -83,7 +82,6 @@ public class SharedFile {
     }
 
     public static void main(String[] args) throws IOException {
-        // Find the phone number for "John Doe"
         String phoneNumber = findPhoneByLastName("Doe");
         if (phoneNumber.isEmpty()) {
             System.out.println("Record for John Doe not found.");
@@ -91,7 +89,6 @@ public class SharedFile {
             System.out.println("Phone number for John Doe: " + phoneNumber);
         }
 
-        // Find the last name for the phone number "123-456-7890"
         String lastName = findLastNameByPhoneNumber("123-456-7890");
         if (lastName.isEmpty()) {
             System.out.println("Record for phone number 123-456-7890 not found.");
@@ -99,10 +96,8 @@ public class SharedFile {
             System.out.println("Last name for 123-456-7890: " + lastName);
         }
 
-        // Add a new record to the file
         addRecord("Jane Doe", "987-654-3210");
 
-        // Delete the record for "Jane Doe"
-        deleteRecord("Jane Doe");
+         deleteRecord("Jane Doe");
     }
 }
